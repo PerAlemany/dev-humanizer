@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: no-trigger-commit
+expected_outcome: |
+  A plain commit request: the skill stays off, the commit follows AGENTS.md, and nothing about humanizing or attribution is said.
+context:
+  scaffold_script: place-files.sh

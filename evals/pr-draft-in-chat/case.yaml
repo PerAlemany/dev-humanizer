@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: pr-draft-in-chat
+expected_outcome: |
+  The reply shows the PR description inside a single fenced markdown block with a longer outer fence, so the inner Python example doesn't break it; notes to the user sit outside the block; no file is written.
+context:
+  scaffold_script: place-files.sh

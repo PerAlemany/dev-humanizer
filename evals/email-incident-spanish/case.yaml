@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: email-incident-spanish
+expected_outcome: |
+  email.md is a short Spanish email to Laura that opens with what happened, keeps every fact from the request and adds none.

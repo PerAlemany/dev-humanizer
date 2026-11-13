@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: commit-style-en
+expected_outcome: |
+  The commit copies the short lowercase English history (no prefix, issue in parentheses, no body) and carries no AI attribution trailer.
+context:
+  scaffold_script: place-files.sh

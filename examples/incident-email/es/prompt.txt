@@ -1,0 +1,1 @@
+En notes.txt están mis notas de la guardia de ayer por la tarde. Escribe el correo para Laura Gómez, responsable de sistemas de nuestro cliente Logística Norte, y guárdalo en email.md.

@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: slack-ask-first-spanish
+expected_outcome: |
+  slack.md holds a short Spanish message to Carmen whose first sentence after the greeting already asks for the report to go to Dani or be delayed a week; the context comes after; nothing is added that the user didn't say.

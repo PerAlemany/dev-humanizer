@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: pr-description-uses-template
+expected_outcome: |
+  pr.md fills the repo's PR template in English, keeps the facts of the branch, invents no motivation and has no AI footer.
+context:
+  scaffold_script: place-files.sh

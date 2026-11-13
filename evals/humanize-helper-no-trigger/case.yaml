@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: humanize-helper-no-trigger
+expected_outcome: |
+  A request for a humanize() byte-size formatter is ordinary coding: the skill does not turn on.
+context:
+  scaffold_script: place-files.sh

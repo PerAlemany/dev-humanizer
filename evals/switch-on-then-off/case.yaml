@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: switch-on-then-off
+expected_outcome: |
+  The agent shows the status line when the switch turns on, writes a humanized Slack message in a copyable block, then acknowledges turning it off and answers the second question in its normal voice.

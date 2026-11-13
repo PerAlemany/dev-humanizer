@@ -1,0 +1,20 @@
+on-call notes, Thu 12 Nov
+
+18:02 pager: billing-api 5xx rate > 5%
+18:04 grafana: 502s from the load balancer, ~60% of requests. node 3 looks fine
+18:07 checked the last deploy: none today for billing-api
+18:09 db ok, connections normal. not the db
+18:12 asked in #infra. Tom says he changed the load balancer health check at 17:55 (ticket INF-2291)
+18:15 the LB has nodes 1 and 2 as unhealthy. they're fine, answering on :8080/health. the new check points to /healthz, which doesn't exist on 1 and 2 (old image)
+18:20 restarted node 1 just to try -> still marked unhealthy, of course. wasted time
+18:26 Tom can't revert: the terraform state is locked by a stuck CI job
+18:33 unlocked the state by hand (Helen ok'd it)
+18:38 LB change reverted. nodes 1 and 2 healthy again
+18:40 error rate at 0. closing the page
+18:55 checked the invoices table: every invoice created between 18:00 and 18:40 that got a 200 is there. the requests that got a 502 never reached the app, nothing half-written
+19:05 Northern Freight: 214 requests with a 502 in that window (LB logs). their integration retries 3 times, so some went through later. the rest can be resent: it's idempotent by invoice number
+19:20 others affected: 3 more clients, lower volume
+TODO alert when fewer than 2 nodes are healthy (today we only alert on 5xx rate) -> done at 20:10, INF-2293
+TODO load balancer changes need a second reviewer -> agreed with Helen, in place from tomorrow
+TODO why is node 3 on a newer image than 1 and 2? ask Tom on Monday
+note: I was having dinner, took 2 min to get to the laptop

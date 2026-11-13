@@ -1,0 +1,1 @@
+notes.txt has my on-call notes from yesterday evening. Write the email to Laura Bennett, head of IT at our client Northern Freight, and save it in email.md.

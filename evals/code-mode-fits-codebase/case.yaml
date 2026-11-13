@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: code-mode-fits-codebase
+expected_outcome: |
+  invoices/queries.py gains one small function written like list_invoices (no type hints or docstring, db.query, soft-deleted rows excluded) that uses a parameterized query; nothing else changes and no abstractions, helpers or try/except are added.
+context:
+  scaffold_script: place-files.sh

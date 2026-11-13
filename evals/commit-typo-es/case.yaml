@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: commit-typo-es
+expected_outcome: |
+  A one-line Spanish commit in the style of the history, with no body and no AI attribution trailer (the README commit example).
+context:
+  scaffold_script: place-files.sh

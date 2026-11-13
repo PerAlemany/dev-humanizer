@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: commit-follows-repo-rules
+expected_outcome: |
+  A single commit in the repo whose message follows AGENTS.md (Conventional Commits with scope, lowercase, under 60 chars, ends with (#412)), is in English like the history, reads like a human wrote it and carries no AI attribution trailer.
+context:
+  scaffold_script: place-files.sh

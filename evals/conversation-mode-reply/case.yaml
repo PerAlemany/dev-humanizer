@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: conversation-mode-reply
+expected_outcome: |
+  The agent turns on conversation mode on its own, says so in a short status line, and answers the React question plainly: correct content, no chat residue, no em dashes, no bold everywhere, no closing summary.

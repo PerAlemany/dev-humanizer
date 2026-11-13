@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: incident-email-notes-es
+expected_outcome: |
+  email.md is a plain Spanish email to Laura that opens with what happened, tells the client what to resend, keeps every fact she needs from notes.txt and leaves out the internal detail (the node restart, the dinner, the open question about images).
+context:
+  scaffold_script: place-files.sh

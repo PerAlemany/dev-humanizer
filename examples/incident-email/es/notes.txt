@@ -1,0 +1,20 @@
+notas guardia, jue 12 nov
+
+18:02 salta el busca: billing-api tasa de 5xx > 5 %
+18:04 grafana: 502 desde el balanceador, ~60 % de las peticiones. el nodo 3 va bien
+18:07 miro el último deploy: hoy no ha habido ninguno de billing-api
+18:09 bd bien, conexiones normales. no es la bd
+18:12 pregunto en #infra. Sergio dice que cambió el health check del balanceador a las 17:55 (ticket INF-2291)
+18:15 el balanceador da los nodos 1 y 2 por caídos. están bien, responden en :8080/health. el check nuevo apunta a /healthz, que en 1 y 2 no existe (imagen antigua)
+18:20 reinicio el nodo 1 por probar -> sigue marcado como caído, claro. tiempo perdido
+18:26 Sergio no puede revertir: el state de terraform está bloqueado por un job de CI colgado
+18:33 desbloqueo el state a mano (con el ok de Elena)
+18:38 revertido el cambio del balanceador. nodos 1 y 2 otra vez sanos
+18:40 tasa de errores a 0. cierro el aviso
+18:55 reviso la tabla de facturas: todas las creadas entre las 18:00 y las 18:40 que recibieron un 200 están. las peticiones con 502 no llegaron a la aplicación, no hay nada a medias
+19:05 Logística Norte: 214 peticiones con 502 en ese rato (logs del balanceador). su integración reintenta 3 veces, así que parte entró después. las que no, se pueden reenviar: es idempotente por número de factura
+19:20 otros afectados: 3 clientes más, con menos volumen
+PENDIENTE alerta si hay menos de 2 nodos sanos (hoy solo avisamos por tasa de 5xx) -> hecha a las 20:10, INF-2293
+PENDIENTE los cambios del balanceador necesitan un segundo revisor -> hablado con Elena, se aplica desde mañana
+PENDIENTE ¿por qué el nodo 3 lleva una imagen más nueva que 1 y 2? preguntar a Sergio el lunes
+nota: me pilló cenando, tardé 2 min en llegar al portátil

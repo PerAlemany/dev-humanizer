@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: code-mode-house-helpers
+expected_outcome: |
+  The new code reuses the repo's own helpers (money(), InvoiceError) and conventions (no docstrings or type hints) and stays as small as the rest of the repo.
+context:
+  scaffold_script: place-files.sh
