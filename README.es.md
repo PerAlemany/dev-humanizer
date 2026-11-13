@@ -112,7 +112,7 @@ Algunos proyectos prohíben directamente las contribuciones generadas con IA. Ah
 
 ### Qué elimina
 
-Los rastros que recoge `references/patterns.md`: contrastes teatrales («no solo X, sino Y»), restos de chat («¡Claro!», «Espero que te sirva»), vocabulario inflado, rayas, viñetas con etiqueta en negrita, comentarios que narran el código, docstrings que repiten el nombre de la función, mensajes de log con emojis y peticiones enterradas al final de los correos. Los mensajes de error nuevos dicen qué ha fallado y con qué dato, y nunca incluyen secretos, tokens ni datos personales. Además, cuida la redacción. Las frases son cortas, se conservan todos los datos de la fuente y no se inventa ninguno.
+Los rastros que recoge [`references/patterns.md`](skills/dev-humanizer/references/patterns.md): contrastes teatrales («no solo X, sino Y»), restos de chat («¡Claro!», «Espero que te sirva»), vocabulario inflado, rayas, viñetas con etiqueta en negrita, comentarios que narran el código, docstrings que repiten el nombre de la función, mensajes de log con emojis y peticiones enterradas al final de los correos. Los mensajes de error nuevos dicen qué ha fallado y con qué dato, y nunca incluyen secretos, tokens ni datos personales. Además, cuida la redacción. Las frases son cortas, se conservan todos los datos de la fuente y no se inventa ninguno.
 
 También detecta los rastros más sutiles que quedan cuando ya no están los anteriores: un rótulo con dos puntos delante de un párrafo («Próximos pasos:»), todos los puntos con el mismo espacio y la misma forma, frases tranquilizadoras y ofrecimientos de cierre de manual, y huecos como «[tu nombre]» en un texto que vas a enviar. No se pierde nada que el lector necesite. Lo pequeño, simplemente, deja de ocupar tanto como lo importante.
 
@@ -205,30 +205,31 @@ Los dos salen de Claude Opus 5.5 en Claude Code, con la versión actual de la sk
 
 ### Claude Code
 
-Para todos tus proyectos:
-
-```bash
-git clone https://github.com/PerAlemany/dev-humanizer.git ~/.claude/skills/dev-humanizer
-```
-
-Para un solo proyecto, desde su raíz:
-
-```bash
-git clone https://github.com/PerAlemany/dev-humanizer.git .claude/skills/dev-humanizer
-```
-
 Con la CLI de skills (quita `--global` para instalarla solo en el proyecto actual):
 
 ```bash
 npx skills add PerAlemany/dev-humanizer --global --agent claude-code
 ```
 
-### Claude.ai y la app de escritorio de Claude
-
-Comprime en un ZIP la carpeta `dev-humanizer` con `SKILL.md` y `references/` dentro, y súbelo como skill en los ajustes. Desde la carpeta que contiene `dev-humanizer`:
+Con la CLI de GitHub, versión 2.90 o posterior (usa `--scope project` para instalarla solo en el proyecto actual):
 
 ```bash
-zip -r dev-humanizer.zip dev-humanizer/SKILL.md dev-humanizer/references
+gh skill install PerAlemany/dev-humanizer dev-humanizer --agent claude-code --scope user
+```
+
+Sin ninguna de las dos, clona el repo y copia la carpeta de la skill. Para un solo proyecto, cópiala en `.claude/skills/` dentro de la raíz del proyecto:
+
+```bash
+git clone --depth 1 https://github.com/PerAlemany/dev-humanizer.git
+cp -R dev-humanizer/skills/dev-humanizer ~/.claude/skills/
+```
+
+### Claude.ai y la app de escritorio de Claude
+
+Comprime en un ZIP la carpeta `skills/dev-humanizer`, que contiene `SKILL.md` y `references/`, y súbelo como skill en los ajustes. Desde la raíz de un clon de este repo:
+
+```bash
+cd skills && zip -r ../dev-humanizer.zip dev-humanizer
 ```
 
 ### Otros agentes
@@ -239,15 +240,16 @@ Para Codex, Cursor, OpenCode y el resto de agentes que admite la CLI de skills:
 npx skills add PerAlemany/dev-humanizer --agent '*'
 ```
 
-O copia la carpeta `dev-humanizer` en el directorio de skills del agente.
+O copia la carpeta `skills/dev-humanizer` en el directorio de skills del agente.
 
 ## Archivos
 
 ```
-SKILL.md                 modos, estilo del proyecto, reglas por tipo de texto
+skills/dev-humanizer/    la skill, la única carpeta que copian los instaladores
+  SKILL.md               modos, estilo del proyecto, reglas por tipo de texto
+  references/patterns.md catálogo de patrones (secciones A a I), ejemplos en inglés y español
 examples/                todas las ejecuciones del ejemplo del README y cómo se eligió
 assets/                  el banner, en versión clara y oscura
-references/patterns.md   catálogo de patrones (secciones A a I), ejemplos en inglés y español
 evals/                   casos de prueba y los scripts que crean sus repos
 LICENSE                  licencia MIT
 ```

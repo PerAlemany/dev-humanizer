@@ -112,7 +112,7 @@ Some projects forbid AI-generated contributions altogether. There the agent does
 
 ### What it removes
 
-The tells listed in `references/patterns.md`: staged contrasts ("not just X, but Y"), chat residue ("Certainly!", "I hope this helps"), inflated vocabulary, em dashes, bold-label bullets, narrating comments, tautological docstrings, emoji log messages and asks buried at the end of emails. New error messages say what failed and with which input, and never include secrets, tokens or personal data. It also looks after the writing itself. Sentences are short, every fact from the source is kept and none is invented.
+The tells listed in [`references/patterns.md`](skills/dev-humanizer/references/patterns.md): staged contrasts ("not just X, but Y"), chat residue ("Certainly!", "I hope this helps"), inflated vocabulary, em dashes, bold-label bullets, narrating comments, tautological docstrings, emoji log messages and asks buried at the end of emails. New error messages say what failed and with which input, and never include secrets, tokens or personal data. It also looks after the writing itself. Sentences are short, every fact from the source is kept and none is invented.
 
 It also catches the subtler signs left once those are gone: a label with a colon in front of a paragraph ("Next steps:"), every item given the same space and the same shape, stock reassurance and closing offers, and placeholders like "[your name]" in a text you're about to send. Nothing the reader needs is dropped. The small points just stop taking as much room as the important one.
 
@@ -206,30 +206,31 @@ Both come from Claude Opus 5.5 in Claude Code, with the current version of the s
 
 ### Claude Code
 
-For all your projects:
-
-```bash
-git clone https://github.com/PerAlemany/dev-humanizer.git ~/.claude/skills/dev-humanizer
-```
-
-For one project, from its root:
-
-```bash
-git clone https://github.com/PerAlemany/dev-humanizer.git .claude/skills/dev-humanizer
-```
-
 With the skills CLI (drop `--global` to install for the current project only):
 
 ```bash
 npx skills add PerAlemany/dev-humanizer --global --agent claude-code
 ```
 
-### Claude.ai and the Claude desktop app
-
-Zip the `dev-humanizer` folder with `SKILL.md` and `references/` inside, then upload the ZIP as a skill in Settings. From the folder that contains `dev-humanizer`:
+With the GitHub CLI, version 2.90 or later (use `--scope project` to install for the current project only):
 
 ```bash
-zip -r dev-humanizer.zip dev-humanizer/SKILL.md dev-humanizer/references
+gh skill install PerAlemany/dev-humanizer dev-humanizer --agent claude-code --scope user
+```
+
+Without either CLI, clone the repo and copy the skill folder. For one project, copy it to `.claude/skills/` in the project's root instead:
+
+```bash
+git clone --depth 1 https://github.com/PerAlemany/dev-humanizer.git
+cp -R dev-humanizer/skills/dev-humanizer ~/.claude/skills/
+```
+
+### Claude.ai and the Claude desktop app
+
+Zip the `skills/dev-humanizer` folder, which holds `SKILL.md` and `references/`, then upload the ZIP as a skill in Settings. From the root of a clone of this repo:
+
+```bash
+cd skills && zip -r ../dev-humanizer.zip dev-humanizer
 ```
 
 ### Other agents
@@ -240,15 +241,16 @@ For Codex, Cursor, OpenCode and other agents the skills CLI supports:
 npx skills add PerAlemany/dev-humanizer --agent '*'
 ```
 
-Or copy the `dev-humanizer` folder into the agent's skills directory.
+Or copy the `skills/dev-humanizer` folder into the agent's skills directory.
 
 ## Files
 
 ```
-SKILL.md                 modes, house style, rules for each kind of text
+skills/dev-humanizer/    the skill itself, the only folder the installers copy
+  SKILL.md               modes, house style, rules for each kind of text
+  references/patterns.md pattern catalog (sections A to I), English and Spanish examples
 examples/                every run behind the README example, and how it was chosen
 assets/                  the banner, in light and dark versions
-references/patterns.md   pattern catalog (sections A to I), English and Spanish examples
 evals/                   test cases and the scripts that build their repos
 LICENSE                  MIT license
 ```
