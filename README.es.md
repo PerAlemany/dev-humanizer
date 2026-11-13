@@ -1,8 +1,23 @@
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/banner-dark.svg">
+    <img src="assets/banner-light.svg" alt="Un robot simpático escribe a mano una línea en un terminal, junto al nombre dev-humanizer" width="700">
+  </picture>
+</p>
+
 # dev-humanizer
 
 [English](README.md) | Español
 
 Una skill para agentes que hace que los textos que tu agente de programación escribe para otras personas (commits, PR, comentarios en el código, documentación, correos, mensajes al equipo) parezcan escritos por una persona cuidadosa. Sin rastros de IA y sin líneas de atribución a la IA. Si quieres, también adapta el código al proyecto y cambia cómo te habla el agente. Solo se activa cuando se lo pides.
+
+Instálala en Claude Code, Codex, Cursor y otros agentes con la CLI de skills:
+
+```bash
+npx skills add PerAlemany/dev-humanizer
+```
+
+Tienes otras formas de instalarla en [Instalación](#instalación).
 
 ## Cómo se activa
 
@@ -231,6 +246,7 @@ O copia la carpeta `dev-humanizer` en el directorio de skills del agente.
 ```
 SKILL.md                 modos, estilo del proyecto, reglas por tipo de texto
 examples/                todas las ejecuciones del ejemplo del README y cómo se eligió
+assets/                  el banner, en versión clara y oscura
 references/patterns.md   catálogo de patrones (secciones A a I), ejemplos en inglés y español
 evals/                   casos de prueba y los scripts que crean sus repos
 LICENSE                  licencia MIT
@@ -267,6 +283,8 @@ claude plugin eval . --allow-tools Write,Edit,Bash --scaffold
 ## Créditos
 
 El catálogo de patrones parte de [Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing), de Wikipedia (WikiProject AI Cleanup), y de [blader/humanizer](https://github.com/blader/humanizer), [ofershap/ai-humanizer](https://github.com/ofershap/ai-humanizer) y [existential-birds/beagle](https://github.com/existential-birds/beagle).
+
+La letra manuscrita del banner es [Caveat](https://github.com/googlefonts/caveat), de The Caveat Project Authors, con licencia SIL Open Font License 1.1.
 
 ## Licencia
 

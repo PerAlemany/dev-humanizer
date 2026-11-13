@@ -1,8 +1,23 @@
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/banner-dark.svg">
+    <img src="assets/banner-light.svg" alt="A friendly robot writing a handwritten line in a terminal, next to the name dev-humanizer" width="700">
+  </picture>
+</p>
+
 # dev-humanizer
 
 English | [Español](README.es.md)
 
 An agent skill that makes the text your coding agent writes for other people (commits, PRs, code comments, docs, emails, team messages) read like a careful human wrote it. It leaves out AI tells and AI attribution lines. On request it also makes the code fit the project and changes how the agent talks to you. It stays off until you ask for it.
+
+Install it for Claude Code, Codex, Cursor and other agents with the skills CLI:
+
+```bash
+npx skills add PerAlemany/dev-humanizer
+```
+
+Other ways to install it are under [Install](#install).
 
 ## Turning it on
 
@@ -232,6 +247,7 @@ Or copy the `dev-humanizer` folder into the agent's skills directory.
 ```
 SKILL.md                 modes, house style, rules for each kind of text
 examples/                every run behind the README example, and how it was chosen
+assets/                  the banner, in light and dark versions
 references/patterns.md   pattern catalog (sections A to I), English and Spanish examples
 evals/                   test cases and the scripts that build their repos
 LICENSE                  MIT license
@@ -268,6 +284,8 @@ claude plugin eval . --allow-tools Write,Edit,Bash --scaffold
 ## Credits
 
 The pattern catalog draws on Wikipedia's [Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) (WikiProject AI Cleanup) and on [blader/humanizer](https://github.com/blader/humanizer), [ofershap/ai-humanizer](https://github.com/ofershap/ai-humanizer) and [existential-birds/beagle](https://github.com/existential-birds/beagle).
+
+The handwriting in the banner is [Caveat](https://github.com/googlefonts/caveat), by The Caveat Project Authors, under the SIL Open Font License 1.1.
 
 ## License
 
