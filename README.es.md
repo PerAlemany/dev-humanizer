@@ -112,7 +112,7 @@ Algunos proyectos prohíben directamente las contribuciones generadas con IA. Ah
 
 ### Qué elimina
 
-Los rastros que recoge [`references/patterns.md`](skills/dev-humanizer/references/patterns.md): contrastes teatrales («no solo X, sino Y»), restos de chat («¡Claro!», «Espero que te sirva»), vocabulario inflado, rayas, viñetas con etiqueta en negrita, comentarios que narran el código, docstrings que repiten el nombre de la función, mensajes de log con emojis y peticiones enterradas al final de los correos. Los mensajes de error nuevos dicen qué ha fallado y con qué dato, y nunca incluyen secretos, tokens ni datos personales. Además, cuida la redacción. Las frases son cortas, se conservan todos los datos de la fuente y no se inventa ninguno.
+Los rastros que recogen [`references/patterns.md`](skills/dev-humanizer/references/patterns.md) y, para el español, [`references/languages/es.md`](skills/dev-humanizer/references/languages/es.md): contrastes teatrales («no solo X, sino Y»), restos de chat («¡Claro!», «Espero que te sirva»), vocabulario inflado, rayas, viñetas con etiqueta en negrita, comentarios que narran el código, docstrings que repiten el nombre de la función, mensajes de log con emojis y peticiones enterradas al final de los correos. Los mensajes de error nuevos dicen qué ha fallado y con qué dato, y nunca incluyen secretos, tokens ni datos personales. Además, cuida la redacción. Las frases son cortas, se conservan todos los datos de la fuente y no se inventa ninguno.
 
 También detecta los rastros más sutiles que quedan cuando ya no están los anteriores: un rótulo con dos puntos delante de un párrafo («Próximos pasos:»), todos los puntos con el mismo espacio y la misma forma, frases tranquilizadoras y ofrecimientos de cierre de manual, y huecos como «[tu nombre]» en un texto que vas a enviar. No se pierde nada que el lector necesite. Lo pequeño, simplemente, deja de ocupar tanto como lo importante.
 
@@ -247,7 +247,8 @@ O copia la carpeta `skills/dev-humanizer` en el directorio de skills del agente.
 ```
 skills/dev-humanizer/    la skill, la única carpeta que copian los instaladores
   SKILL.md               modos, estilo del proyecto, reglas por tipo de texto
-  references/patterns.md catálogo de patrones (secciones A a I), ejemplos en inglés y español
+  references/patterns.md catálogo de patrones (secciones A a I)
+  references/languages/  rastros y formas de pedirlo en cada idioma (es.md: español)
 examples/                todas las ejecuciones del ejemplo del README y cómo se eligió
 assets/                  el banner, en versión clara y oscura
 evals/                   casos de prueba y los scripts que crean sus repos

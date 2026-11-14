@@ -248,7 +248,8 @@ Or copy the `skills/dev-humanizer` folder into the agent's skills directory.
 ```
 skills/dev-humanizer/    the skill itself, the only folder the installers copy
   SKILL.md               modes, house style, rules for each kind of text
-  references/patterns.md pattern catalog (sections A to I), English and Spanish examples
+  references/patterns.md pattern catalog (sections A to I)
+  references/languages/  tells and phrasings for each language (es.md: Spanish)
 examples/                every run behind the README example, and how it was chosen
 assets/                  the banner, in light and dark versions
 evals/                   test cases and the scripts that build their repos

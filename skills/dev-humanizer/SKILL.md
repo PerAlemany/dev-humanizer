@@ -1,6 +1,6 @@
 ---
 name: dev-humanizer
-description: 'Makes text for other people (commits, PRs, reviews, code comments, docs, emails, team messages) read as written by a careful human, without AI tells. Use only when the user asks how text should read: "humanize this", "write like a human", "humaniza", "escribe como un humano", "que no parezca IA". Modes: code ("humaniza código"), conversation ("humaniza conversación"); "humanízate" turns on everything. Not for humanize() date or size formatting.'
+description: 'Makes text for other people (commits, PRs, reviews, code comments, docs, emails, team messages) read as written by a careful human, without AI tells. Use only when the user asks how text should read, in any language: "humanize this", "write like a human", "make it not sound like AI". Modes: code ("humanize code", "code like a human"), conversation ("humanize conversation", "talk to me like a person"); "humanize yourself" turns on everything. Not for humanize() date or size formatting.'
 license: MIT
 ---
 
@@ -14,27 +14,29 @@ The skill runs only when the user asks for it. Ordinary tasks without such a req
 
 | Mode | What it covers | Turned on by requests like |
 |---|---|---|
-| Prose | Text other people will read: commits, PRs, review comments, issues, code comments and docstrings, docs, emails, team messages | "humaniza este commit", "humaniza redacción", "humaniza a partir de ahora", "escribe como un humano", "write this PR like a human" |
-| Code | The structure of the code itself (see "Code mode"). Always comes with prose mode | "humaniza código", "programa como un humano", "escribe el código como un humano", "humanize code", "write the code like a human", "que el código no parezca de IA" |
-| Conversation | Your own replies to the user (see "Conversation mode"). Can run on its own | "humaniza conversación", "háblame como un humano", "humanize conversation", "talk to me like a person", "no me hables como un robot" |
-| Everything | The three modes | "humanízate", "humanize yourself", "humanízalo todo", "humanize everything", "modo completo" |
+| Prose | Text other people will read: commits, PRs, review comments, issues, code comments and docstrings, docs, emails, team messages | "humanize this commit", "humanize prose", "humanize from now on", "write like a human", "write this PR like a human" |
+| Code | The structure of the code itself (see "Code mode"). Always comes with prose mode | "humanize code", "code like a human", "write the code like a human", "don't make the code look AI-written" |
+| Conversation | Your own replies to the user (see "Conversation mode"). Can run on its own | "humanize conversation", "talk to me like a person", "stop talking to me like a robot" |
+| Everything | The three modes | "humanize yourself", "humanize everything", "full mode" |
 
-**Prose or code.** A request about writing that doesn't mention code ("write like a human", "escribe como un humano") means prose mode. Code mode needs a request that names code or programming ("humaniza código", "programa como un humano", "humanize code"). A request about your own answer ("explícame como un humano", "explain it like a human") means conversation mode.
+Users ask in their own language. Recognise the same requests in any language, by meaning rather than by exact words, and reply in that language. If `references/languages/<code>.md` exists for the user's language (for example `es.md` for Spanish), read it: it has the usual phrasings, the status line wording and the tells specific to that language.
+
+**Prose or code.** A request about writing that doesn't mention code ("write like a human") means prose mode. Code mode needs a request that names code or programming ("humanize code", "code like a human"). A request about your own answer ("explain it like a human") means conversation mode.
 
 **Requests add up.** A request turns on what it names and keeps whatever was already on. Nothing turns off unless the user asks. In practice:
 
 - Conversation on its own: only your replies change.
 - Prose mode while conversation is on: prose and conversation.
 - Code: code and prose mode, since code mode needs it. If conversation was already on, that's everything.
-- "Humanízate": everything, whatever was on before.
+- "Humanize yourself": everything, whatever was on before.
 
-**Turning modes off.** "Sin modo código" turns off code and keeps prose mode. "Sin modo conversación" turns off conversation. "Sin modo redacción" or "no prose mode" turns off prose mode, and code with it, and keeps conversation if it was on. "Vuelve a lo normal" or "stop humanizing" turn everything off.
+**Turning modes off.** "No code mode" turns off code and keeps prose mode. "No conversation mode" turns off conversation. "No prose mode" turns off prose mode, and code with it, and keeps conversation if it was on. "Back to normal" or "stop humanizing" turn everything off.
 
 **How long it stays on.** The same rule applies to every mode. Read what the request is attached to:
 
-- **A concrete task:** the mode applies to that task only. Examples: "humaniza este commit", "escribe como un humano un mensaje para mi manager", "explícame como un humano la arquitectura de esta app", "programa como un humano este endpoint".
-- **No task, or a general statement:** the mode stays on until the user says otherwise. Examples: "escribe como un humano", "háblame como un humano", "a partir de ahora programa como un humano", "humanízate". A general statement followed by a task ("a partir de ahora escribe como un humano y haz el commit") is general.
-- **An explicit limit:** follow it. It can be time ("durante esta tarde", "for the next hour"), a condition ("hasta que hagamos merge", "until the PR is open"), a kind of text ("solo para los emails", "only commits") or a place ("solo en este repo"). Use the two-line status and state the limit in it. When it ends, say so in one line at the start of your next reply, for example "dev-humanizer: off, the afternoon is over." You have no reliable clock, so for time limits use timestamps if the conversation shows them, and otherwise ask the user to tell you when to stop.
+- **A concrete task:** the mode applies to that task only. Examples: "humanize this commit", "write my manager a message like a human", "explain this app's architecture like a human", "code this endpoint like a human".
+- **No task, or a general statement:** the mode stays on until the user says otherwise. Examples: "write like a human", "talk to me like a person", "from now on, code like a human", "humanize yourself". A general statement followed by a task ("from now on write like a human, and make the commit") is general.
+- **An explicit limit:** follow it. It can be time ("this afternoon", "for the next hour"), a condition ("until we merge", "until the PR is open"), a kind of text ("only for emails", "only commits") or a place ("only in this repo"). Use the two-line status and state the limit in it. When it ends, say so in one line at the start of your next reply, for example "dev-humanizer: off, the afternoon is over." You have no reliable clock, so for time limits use timestamps if the conversation shows them, and otherwise ask the user to tell you when to stop.
 
 If you can't tell whether a request is one-off or general, apply it to the current task and offer to keep it on in the status line.
 
@@ -42,20 +44,20 @@ If you can't tell whether a request is one-off or general, apply it to the curre
 
 ```text
 dev-humanizer: on for text for others and conversation. Code off.
-Add it with "humaniza código"; turn off one mode with "sin modo conversación", or everything with "vuelve a lo normal".
+Add it with "humanize code"; turn off one mode with "no conversation mode", or everything with "back to normal".
 ```
 
 For a single task, one line is enough, and it says how to keep it on:
 
 ```text
-dev-humanizer: on for this commit only. Say "a partir de ahora" to keep it on.
+dev-humanizer: on for this commit only. Say "from now on" to keep it on.
 ```
 
-Keep the "dev-humanizer:" prefix and write the rest in the user's language, naming the modes as the README does (in Spanish: Redacción, Código, Conversación). List the shortest set of options that would change something, not every synonym. If the message only changes modes, the status is the whole reply. Whenever a lasting mode turns off for a reason other than the user asking (a limit was reached, the user moved outside "solo en este repo", a project rule forbids it), say so in one line at the start of that reply, with the reason. A one-off request, alone or while other modes are on, gets its one-line status in the same reply where it applies, and nothing more afterwards. The status line is fixed text, so conversation mode doesn't restyle it. When everything turns off, one line is enough ("dev-humanizer: off"). Don't repeat the status on every message. Show it again only when the state changes, or when the user asks what's on. If the conversation was summarised or compacted and you're no longer sure what's on, ask in one line rather than guess.
+Keep the "dev-humanizer:" prefix and write the rest in the user's language, naming the modes as that language's README does (the language file has the wording). List the shortest set of options that would change something, not every synonym. If the message only changes modes, the status is the whole reply. Whenever a lasting mode turns off for a reason other than the user asking (a limit was reached, the user moved outside "only in this repo", a project rule forbids it), say so in one line at the start of that reply, with the reason. A one-off request, alone or while other modes are on, gets its one-line status in the same reply where it applies, and nothing more afterwards. The status line is fixed text, so conversation mode doesn't restyle it. When everything turns off, one line is enough ("dev-humanizer: off"). Don't repeat the status on every message. Show it again only when the state changes, or when the user asks what's on. If the conversation was summarised or compacted and you're no longer sure what's on, ask in one line rather than guess.
 
-**What doesn't turn it on.** Requests about formatting data ("humanize the timestamps", "add a humanize() helper for byte sizes", "humaniza el formato de las fechas") are ordinary coding tasks. So is switching the agent's own "code mode" in tools that have one. If you can't tell whether the user means their outbound text or your tone in the chat, ask in one line.
+**What doesn't turn it on.** Requests about formatting data ("humanize the timestamps", "add a humanize() helper for byte sizes", "humanize the date format") are ordinary coding tasks. So is switching the agent's own "code mode" in tools that have one. If you can't tell whether the user means their outbound text or your tone in the chat, ask in one line.
 
-**Text the user gives you.** "Humaniza esto: ..." with pasted text: rewrite it, keep every fact and return it ready to copy (see "Showing drafts in the conversation"). A file: edit the file in place and summarise the change in a few lines, without pasting the whole file. For long texts, work section by section and keep the structure, so no fact gets lost.
+**Text the user gives you.** "Humanize this: ..." with pasted text: rewrite it, keep every fact and return it ready to copy (see "Showing drafts in the conversation"). A file: edit the file in place and summarise the change in a few lines, without pasting the whole file. For long texts, work section by section and keep the structure, so no fact gets lost.
 
 ## Scope of prose mode
 
@@ -192,21 +194,22 @@ Removing tells is half the job. The text also has to be well written: clear, con
 **Short sentences, one idea each.** Models chain clauses with commas until a sentence carries three or four ideas. When a sentence needs more than two or three commas, split it. Prefer subject, verb, object. Cut clauses that don't change what the reader will do or understand.
 
 ```
-# Renovamos el token a los 50 minutos, aunque caduca a la hora,
-# porque si una petición sale justo antes de la caducidad, el
-# servidor la rechaza, obligando al cliente a repetirla.
+# We renew the token at 50 minutes, even though it lasts an hour,
+# because if a request goes out just before it expires, the server
+# rejects it, which forces the client to send it again, and that
+# costs a round trip.
 ```
 
 ```
-# El token caduca a la hora. Lo renovamos a los 50 minutos para
-# que ninguna petición salga con un token a punto de caducar.
+# The token lasts an hour. We renew it at 50 minutes so that no
+# request goes out with a token about to expire.
 ```
 
-**Write natively, not in translation.** When the text isn't in English, write it as a native speaker would, not as English rendered word by word. Literal translations (calques) are a strong tell because the model often composes in English first. Typical Spanish ones: "golpear" a server (use "saturar", "sobrecargar"), "hace sentido" (tiene sentido), "jugar un rol" (desempeñar un papel, or just "servir para"), "a nivel de" as filler, "eventualmente" meaning "finally", "aplicar a" a job (solicitar), "basado en" for everything, passive voice where Spanish would use "se" or the active. Also the trailing gerund that tacks on a consequence ("..., obligando al cliente a repetirla"): in Spanish it's usually wrong and always clumsy. Make it a new sentence.
+**Write natively, not in translation.** When the text isn't in English, write it as a native speaker would, not as English rendered word by word. Literal translations (calques), English word order, English punctuation and anglicisms where the language has a common word are strong tells, because the model often composes in English first. The language file in `references/languages/` lists the usual ones for that language.
 
-**Loanwords only when needed.** Use the established word in the target language when there is one ("rendimiento", not "performance"; "comentarios", not "feedback"; "probar", not "testear"; "fusionar" or "integrar", not "mergear"). Keep the English term when it's the standard technical word with no settled equivalent (jitter, backoff, deploy, staging, commit) or when the team clearly uses it. Check the thread or repo: if the team writes "deploy", write "deploy". An unnecessary anglicism every other line reads as machine translation.
+**Loanwords only when needed.** Use the established word in the target language when there is one, rather than the English word it replaces. Keep the English term when it's the standard technical word with no settled equivalent (jitter, backoff, deploy, staging, commit) or when the team clearly uses it. Check the thread or repo: if the team writes "deploy", write "deploy". An unnecessary anglicism every other line reads as machine translation.
 
-`references/patterns.md` (sections D7 and I) has more examples.
+`references/patterns.md` (section D7) and the language files have more examples.
 
 ## Showing drafts in the conversation
 
@@ -221,22 +224,22 @@ This applies only when the text is shown for copying. It doesn't apply when you 
 
 ## The patterns to avoid
 
-These apply in every language; the structures transfer even when the words change. The full catalog, with examples in English and Spanish, is in `references/patterns.md`. Read it the first time you use this skill in a session, or when a draft still sounds machine-made and you can't tell why.
+These apply in every language; the structures transfer even when the words change. The full catalog, with English examples, is in `references/patterns.md`; the tells of a specific language are in `references/languages/`. Read it the first time you use this skill in a session, or when a draft still sounds machine-made and you can't tell why.
 
 The ones that matter most in developer and workplace text:
 
 1. **Staging instead of stating.** "Not just X, but Y" / "No se trata solo de X, sino de Y"; one-line dramatic closers; "Here's the thing:"; "The key insight is". State the point.
-2. **Chat residue.** "Certainly!", "Great question", "I hope this helps", "Let me know if you'd like...", "¡Claro!", "Espero que te sirva". Nothing addressed to a chatbot user belongs in a commit or an email.
+2. **Chat residue.** "Certainly!", "Great question", "I hope this helps", "Let me know if you'd like...". Nothing addressed to a chatbot user belongs in a commit or an email.
 3. **Inflated vocabulary.** robust, comprehensive, seamless, leverage, delve, crucial, pivotal, enhance, streamline, showcase, ensure (as filler); robusto, integral, potenciar, fundamental, crucial, garantizar, "cabe destacar". Use the plain word.
 4. **Formatting by rule.** Bold on every other phrase, bold-label bullets, emoji headings, title case headings, triads everywhere, every list exactly three items long.
 5. **Em dashes as the universal connector.** Em dashes (—) are one of the most recognized tells. Use a comma, period, colon or parentheses unless the user's own writing uses them. En dashes in ranges (18:00–18:40, pages 3–7) and hyphens in code, flags and compound words are fine.
-6. **Hedge stacks and filler.** "It's worth noting that", "might potentially", "in order to", "es importante destacar que", "con el fin de".
-7. **Writing about the text.** "This PR aims to...", "The following section describes...", "En este mensaje os quiero comentar...". Say the thing.
+6. **Hedge stacks and filler.** "It's worth noting that", "might potentially", "in order to".
+7. **Writing about the text.** "This PR aims to...", "The following section describes...". Say the thing.
 8. **Re-explaining what the reader knows.** In replies, reviews and team threads the reader has the context. Lead with the decision.
 
 Texts that avoid all of the above can still read as machine-made. These are the tells that remain once the obvious ones are gone:
 
-9. **Labels with a colon in front of a paragraph or list.** "Next steps:", "Worth knowing:", "Smaller things:", "Lo que cambia:", "Para que no vuelva a pasar:". They are headings in disguise. Say it in a normal sentence ("We've also added an alert for…", "Además, ahora…"), or let a plain sentence introduce the list.
+9. **Labels with a colon in front of a paragraph or list.** "Next steps:", "Worth knowing:", "Smaller things:", "What changes:", "So it doesn't happen again:". They are headings in disguise. Say it in a normal sentence ("We've also added an alert for…"), or let a plain sentence introduce the list.
 10. **Covering everything with the same weight.** A person picks what matters to this reader and leaves the rest out. In a review, lead with the problem that blocks the merge and keep every real finding (bugs, crashes, missing cases, docs that no longer match), but give the small ones a line each, or put the nits together in one sentence, instead of a numbered section apiece. In an update or release notes, skip internal changes the reader won't notice and let the important item take more space than the small ones. In a client email, give what the client needs to know or do, not every step of the timeline. Never drop something the reader needs: a fact, a number, a required action or a caveat stays.
 11. **Even, polished rhythm.** Every bullet built the same way ("Verb + object (#123, Name)"), every paragraph the same length, every sentence complete and tidy. People vary: one item gets a sentence, another a few words; one paragraph is long, the next is a line.
 12. **Reassurance and catch-all sentences.** "Your data is safe and nothing else was affected", "If you have any questions about a specific case…", a "you'll need to update X" line after every item. Keep a reassurance only where the reader would ask, and one closing offer at most.

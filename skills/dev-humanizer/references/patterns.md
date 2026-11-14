@@ -2,7 +2,7 @@
 
 Patterns that make outbound text read as machine-written, grouped by kind. Each one describes a default choice a model makes because it fits the widest range of readers; a human writer chooses for one reader. Any single pattern can be a deliberate human choice, so judge a passage by how many show up together, and leave quotations, proper names and text that discusses a phrase alone.
 
-The structures carry across languages. Examples are given in English and Spanish; for other languages, look for the equivalent construction.
+The structures carry across languages. Examples here are in English; for another language, look for the equivalent construction, and read `languages/<code>.md` if there is one (for example `languages/es.md` for Spanish).
 
 ## Contents
 
@@ -22,30 +22,30 @@ The structures carry across languages. Examples are given in English and Spanish
 
 Strongest tells. One sighting justifies an edit.
 
-**A1. Not X but Y.** "It's not just a fix, it's a rethink of the flow." / "No es solo un cambio de API, es una nueva forma de trabajar." Also the split version ("This doesn't mean X. It means Y.") and the clipped tail ("..., no guessing" / "..., sin complicaciones"). Keep a contrast only when the reader actually believes the negative half.
+**A1. Not X but Y.** "It's not just a fix, it's a rethink of the flow." Also the split version ("This doesn't mean X. It means Y.") and the clipped tail ("..., no guessing"). Keep a contrast only when the reader actually believes the negative half.
 
 > Before: This isn't just a performance tweak; it's a fundamental change to how we cache.
 > After: This changes the cache key from user ID to session ID, which cuts misses by about half.
 
-**A2. One-line closers.** A short final sentence that restates the paragraph: "That's the real win." / "Y eso marca la diferencia." / "Simple, but effective." Cut it, or replace it with a consequence the paragraph didn't state.
+**A2. One-line closers.** A short final sentence that restates the paragraph: "That's the real win." / "Simple, but effective." Cut it, or replace it with a consequence the paragraph didn't state.
 
-**A3. Deep-sounding framing.** "The real question is", "At its core", "What really matters", "En el fondo", "La clave está en". Replace with the specific claim.
+**A3. Deep-sounding framing.** "The real question is", "At its core", "What really matters". Replace with the specific claim.
 
-**A4. Run-ups.** "Let's dive in", "Here's the thing:", "Quick note:", "Heads up:", "Vamos al lío", "Te cuento:". Start with the point. (A real "heads up" in a Slack message about an outage is fine; the tell is the staged opener before a routine statement.)
+**A4. Run-ups.** "Let's dive in", "Here's the thing:", "Quick note:", "Heads up:". Start with the point. (A real "heads up" in a Slack message about an outage is fine; the tell is the staged opener before a routine statement.)
 
-**A5. Arguing with no one.** "To be clear, this isn't about blame", "I'm not saying the old approach was wrong", "No quiero decir que...", "One might be tempted to...". Remove the defense against an objection nobody raised.
+**A5. Arguing with no one.** "To be clear, this isn't about blame", "I'm not saying the old approach was wrong", "One might be tempted to...". Remove the defense against an objection nobody raised.
 
 ## B. Chat residue and leftovers
 
 Remove outright.
 
-**B1. Chatbot wrappers.** "Certainly!", "Great question!", "Here's the updated...", "I hope this helps", "Let me know if you'd like me to...", "Feel free to reach out", "¡Por supuesto!", "Aquí tienes...", "Espero que te sea útil", "No dudes en contactarme". Particularly damaging when they leak into commits, code comments or PRs.
+**B1. Chatbot wrappers.** "Certainly!", "Great question!", "Here's the updated...", "I hope this helps", "Let me know if you'd like me to...", "Feel free to reach out". Particularly damaging when they leak into commits, code comments or PRs.
 
-**B2. Knowledge-limit disclaimers.** "As of my last update", "Based on the available information", "Según la información disponible". State what isn't known, or cut it.
+**B2. Knowledge-limit disclaimers.** "As of my last update", "Based on the available information". State what isn't known, or cut it.
 
-**B3. Writing about the document.** "This PR aims to address...", "The following changes were made:", "In this email I'd like to...", "El objetivo de este PR es...", "A continuación se detallan...". Say the thing.
+**B3. Writing about the document.** "This PR aims to address...", "The following changes were made:", "In this email I'd like to...". Say the thing.
 
-**B4. Change narration in the artifact.** Comments or docs that describe the edit instead of the code: "Updated to use the new client", "Refactored for clarity", "Added error handling as requested", "Modificado para usar...". The commit message is where change history goes.
+**B4. Change narration in the artifact.** Comments or docs that describe the edit instead of the code: "Updated to use the new client", "Refactored for clarity", "Added error handling as requested". The commit message is where change history goes.
 
 **B5. AI attribution.** `Co-Authored-By: Claude ...`, `Generated with [tool]`, "🤖", session URLs. See SKILL.md for the one exception.
 
@@ -53,39 +53,39 @@ Remove outright.
 
 The fact underneath is usually fine. Keep it, drop the dressing.
 
-**C1. AI vocabulary.** English: delve, leverage, utilize, robust, comprehensive, seamless, crucial, pivotal, paramount, meticulous, intricate, holistic, streamline, enhance, elevate, empower, foster, bolster, showcase, underscore, highlight (verb), landscape (abstract), ecosystem (figurative), tapestry, testament, game-changing, cutting-edge. Spanish: robusto, integral, exhaustivo, fluido/sin fisuras, potenciar, impulsar, optimizar (as filler), fundamental, crucial, clave (as adjective), garantizar (as filler), "cabe destacar", "en el panorama actual", "un antes y un después". Technical uses are fine: "robust regression", "optimize the query plan".
+**C1. AI vocabulary.** English: delve, leverage, utilize, robust, comprehensive, seamless, crucial, pivotal, paramount, meticulous, intricate, holistic, streamline, enhance, elevate, empower, foster, bolster, showcase, underscore, highlight (verb), landscape (abstract), ecosystem (figurative), tapestry, testament, game-changing, cutting-edge. Technical uses are fine: "robust regression", "optimize the query plan".
 
-**C2. Inflated significance.** "marks a pivotal step", "plays a key role", "lays the foundation for", "representa un hito", "sienta las bases". Ordinary changes are ordinary.
+**C2. Inflated significance.** "marks a pivotal step", "plays a key role", "lays the foundation for". Ordinary changes are ordinary.
 
-**C3. Sales voice.** "powerful", "blazing fast", "effortless", "a diverse array of", "potente", "de última generación". Describe what it does and, if you have them, the numbers.
+**C3. Sales voice.** "powerful", "blazing fast", "effortless", "a diverse array of". Describe what it does and, if you have them, the numbers.
 
-**C4. Avoiding simple verbs.** "serves as", "functions as", "boasts", "features", "se erige como", "cuenta con" (when "tiene" works). Use is/has, es/tiene.
+**C4. Avoiding simple verbs.** "serves as", "functions as", "boasts", "features" Use is and has.
 
-**C5. Shallow -ing tails.** "..., ensuring a smooth experience", "..., highlighting the importance of tests", "..., garantizando una experiencia fluida". Cut the tail or turn it into a real claim.
+**C5. Shallow -ing tails.** "..., ensuring a smooth experience", "..., highlighting the importance of tests". Cut the tail or turn it into a real claim.
 
 ## D. Rhythm and formatting by rule
 
-**D1. Forced triads.** "fast, reliable, and scalable", "rápido, seguro y escalable", three examples where one would do. Keep three only when there are really three.
+**D1. Forced triads.** "fast, reliable, and scalable", three examples where one would do. Keep three only when there are really three.
 
 **D2. Em dashes everywhere.** Replace em dashes (—) with commas, periods, colons or parentheses. En dashes in ranges (18:00–18:40, pages 3–7) are fine. Spanish uses the raya (—) legitimately for dialogue and some incisos in edited prose, but in technical and workplace text a stream of them is still a tell. Leave hyphens in code, flags, paths and compound words alone.
 
 **D3. Bold as decoration.** Bold on terms throughout a paragraph, and bullet lists where every item starts with a bold label and colon (`- **Security:** ...`). Remove the bold; turn label lists into a sentence when the labels carry no information.
 
-**D4. Template headings.** "Overview / Key Features / Benefits / Conclusion", "Resumen / Características principales / Conclusión", title case headings ("Getting Started With The API"), emoji headings, a horizontal rule between every section. Use sentence case and only the headings the reader needs.
+**D4. Template headings.** "Overview / Key Features / Benefits / Conclusion", title case headings ("Getting Started With The API"), emoji headings, a horizontal rule between every section. Use sentence case and only the headings the reader needs.
 
 **D5. Uniform structure.** Every paragraph the same length, every list exactly three items, every sentence 15 to 20 words. Real writing is uneven.
 
 **D6. Curly quotes in plain-text targets.** “...” in commits, code, or Markdown that uses straight quotes elsewhere. Weak alone.
 
-**D7. Comma chains.** One sentence carrying three or four ideas joined by commas and subordinate clauses: "Cuando el pedido se cancela, el sistema, si el pago ya se ha capturado, emite el reembolso, notificando al cliente por email, y libera el stock." Split into sentences of one idea each, and cut the clauses the reader doesn't need. A long sentence is fine when it reads easily; a sentence you have to read twice is not.
+**D7. Comma chains.** One sentence carrying three or four ideas joined by commas and subordinate clauses: "When the order is cancelled, the system, if the payment has already been captured, issues the refund, notifying the customer by email, and releases the stock." Split into sentences of one idea each, and cut the clauses the reader doesn't need. A long sentence is fine when it reads easily; a sentence you have to read twice is not.
 
 ## E. Filler and hedging
 
-**E1. Filler phrases.** "It's worth noting that", "It's important to mention", "In order to", "At the end of the day", "Es importante destacar que", "Cabe mencionar que", "Con el fin de", "A día de hoy". Delete; the sentence usually survives.
+**E1. Filler phrases.** "It's worth noting that", "It's important to mention", "In order to", "At the end of the day". Delete; the sentence usually survives.
 
-**E2. Hedge stacks.** "might potentially", "could possibly help in some cases", "podría llegar a ayudar en determinados casos". Keep one qualifier when the doubt is real.
+**E2. Hedge stacks.** "might potentially", "could possibly help in some cases". Keep one qualifier when the doubt is real.
 
-**E3. Generic conclusions.** "In summary, these changes improve the overall quality of the codebase." / "En resumen, estos cambios mejoran la calidad general del código." End on the last concrete point.
+**E3. Generic conclusions.** "In summary, these changes improve the overall quality of the codebase." End on the last concrete point.
 
 **E4. Synonym cycling.** Calling the same thing "the service", "the module", "the component" and "the solution" in one paragraph. Pick the name the codebase uses and stick to it.
 
@@ -120,41 +120,16 @@ G1 to G4, G6 and G7 are about text and apply whenever the outbound switch is on,
 
 ## H. Workplace message tells
 
-**H1. Formulaic openers.** "I hope this message finds you well", "I wanted to reach out to", "Espero que estés bien" as an automatic first line in a work message to a colleague, "Quería comentaros que". In an email to an external contact a brief greeting is normal; it's the stock phrase that reads machine-made.
+**H1. Formulaic openers.** "I hope this message finds you well", "I wanted to reach out to" as an automatic first line in a work message to a colleague. In an email to an external contact a brief greeting is normal; it's the stock phrase that reads machine-made.
 
 **H2. Buried ask.** Context paragraph, then background, then the request in the last sentence. Put the ask or the news first.
 
 **H3. Over-structured Slack.** Headings, bold labels and bullet lists in a three-line message. Write it as a message.
 
-**H4. Formulaic closers.** "Please don't hesitate to reach out if you have any questions", "Quedo a vuestra disposición para cualquier duda", "Thanks in advance for your understanding!". Use a normal sign-off or none, as the channel calls for.
+**H4. Formulaic closers.** "Please don't hesitate to reach out if you have any questions", "Thanks in advance for your understanding!". Use a normal sign-off or none, as the channel calls for.
 
 **H5. Emoji as structure.** 🚀 ✅ 📌 💡 at the start of lines. An emoji the team actually uses (a reaction, a :tada: on a launch) is fine.
 
 ## I. Translationese (non-English text)
 
-Models often compose in English and render the result in the target language. The grammar is correct but the text sounds translated, and native readers notice at once. Write the way a native professional would. The examples are Spanish; every language has its own equivalents.
-
-**I1. Calques.** Expressions translated word by word:
-
-| Calque | Natural Spanish |
-|---|---|
-| golpear el servidor / la API | saturar, sobrecargar, hacer peticiones a |
-| hace sentido | tiene sentido |
-| jugar un rol / un papel clave | servir para, ser importante en |
-| a nivel de código / a nivel de equipo | en el código, en el equipo (or drop it) |
-| eventualmente (= finally) | al final, finalmente |
-| en base a / basado en (everywhere) | según, a partir de, con |
-| aplicar a un puesto | solicitar, presentarse a |
-| asumir (= suppose) | suponer, dar por hecho |
-| remover un archivo | quitar, eliminar, borrar |
-| es por esto que | por eso |
-| tomar ventaja de | aprovechar |
-| fue implementado por el equipo | lo implementó el equipo / se implementó |
-
-**I2. The trailing gerund.** A gerund tacked on at the end to add a consequence or a later action: "El servicio cayó, provocando errores en los pagos", "emite el reembolso, notificando al cliente por email". It mirrors the English -ing clause. In Spanish it's often incorrect (gerundio de posterioridad) and always heavy. Use a new sentence or a conjunction: "El servicio cayó y los pagos empezaron a fallar."
-
-**I3. Unnecessary anglicisms.** English words where a common Spanish one exists: performance (rendimiento), feedback (comentarios, opinión), testear (probar), mergear (fusionar, integrar), deployar (desplegar), trackear (seguir, registrar), issue in prose to non-developers (incidencia, problema), random (aleatorio), approach (enfoque), workaround (solución provisional, apaño), update as a noun (novedades, actualización). Keep the terms that are standard in the field or that the team uses (jitter, backoff, commit, pull request, deploy, staging, endpoint). The test: would a senior Spanish-speaking engineer writing to this reader use the English word? If not, translate it.
-
-**I4. English punctuation and casing.** Title Case In Headings, missing opening ¿ and ¡, quotes in "..." where the team uses «...», decimal points where the reader expects commas (0.5 s vs 0,5 s in prose), and a colon followed by a capital letter in ordinary text.
-
-**I5. English word order and possessives.** "Su contraseña ha sido cambiada" (se ha cambiado tu contraseña), "por favor encuentre adjunto" (te adjunto), "mi equipo y yo estamos encantados de anunciar" (estrenamos...). Address the reader as the team does (tú or usted) and keep it consistent.
+When the text isn't in English, the strongest tell is English showing through: literal translations (calques), English word order and possessives, the English -ing clause tacked on at the end, English punctuation and casing, and English words where the language has a common one. The specific forms depend on the language, so they live in one file per language under `languages/`. Read the file for the language you're writing in (for example `languages/es.md` for Spanish). For a language with no file, apply the same checks: would a senior engineer who writes natively in that language, writing to this reader, phrase it this way?
